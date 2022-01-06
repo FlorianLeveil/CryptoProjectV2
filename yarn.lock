@@ -1056,6 +1056,11 @@
   resolved "https://registry.yarnpkg.com/@expo-google-fonts/archivo-black/-/archivo-black-0.2.0.tgz#35e0a3ef09cf2eaa6d320dbb266e9c3f1fad8dd5"
   integrity sha512-cW8m3kPo1T0Ts2vTSQ5qBKLlRBOzT5w9bmesoPVTi2dptUD79GBTPrf8WdGYkCrb9e9C7V/qj2eztgCE4ktYkw==
 
+"@expo-google-fonts/archivo@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/archivo/-/archivo-0.2.0.tgz#f94343a106507de272a76a6e7b01fbebcea6eb63"
+  integrity sha512-4erhp8X2J0lKNeCqTMgbfn5JX9bdoQd6MTm/f+k4+iXlzfN5Odd5s20RGtFS7onxy/D1HuSViBgpJoAp2EPN9g==
+
 "@expo/config-plugins@3.1.0":
   version "3.1.0"
   resolved "https://registry.npmjs.org/@expo/config-plugins/-/config-plugins-3.1.0.tgz"
