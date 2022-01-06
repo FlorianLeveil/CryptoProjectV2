@@ -8,47 +8,90 @@ import {
 } from "react-native";
 import {LinearGradient} from 'expo-linear-gradient';
 import {useFonts, Archivo_500Medium} from '@expo-google-fonts/archivo';
+import {Ionicons} from "@expo/vector-icons";
 
 import screensStyles from "../CommonStyles";
 import Image from "react-native-web/dist/vendor/react-native/Animated/components/AnimatedImage";
 import Button from "../../components/Button";
+import commonStyles from "../CommonStyles";
 
+const styles = StyleSheet.create({
+	input: {
+		height: 40,
+		margin: 12,
+		borderWidth: 1,
+		padding: 10,
+	},
+	container: {
+		height: 64,
+		borderWidth: 1,
+		padding: 10,
+		borderRadius: 15,
+		borderColor: "#00ff80"
+	},
+	main_container: {
+		height: 84,
+		backgroundColor: "orange"
+	},
+});
 
 const CreatePassword = () => {
 	let [fontsLoaded] = useFonts({
 		Archivo_500Medium,
 	});
+	const [text, onChangeText] = React.useState("Useless Text");
+	const [number, onChangeNumber] = React.useState(null);
 	return (
-		<View style={[styles.container, {
-			// Try setting `flexDirection` to `"row"`.
+		<View style={[commonStyles.container, {
 			flexDirection: "column"
 		}]}>
-			<View style={{flex: 1.5, justifyContent: "center", alignItems: "center", paddingBottom: 20}}>
-				<Image
-						 style={{ width: 248, height: 260, alignItems: "center", justifyContent: "center" }}
-						 source={require('../pictures/WalletSetup.png')} />
-			</View>
 			<View style={{flex: 1}}>
 				<View style={{flex: 1, justifyContent: "center"}}>
-					<Text style={{textAlign: "center",color: "white" ,fontFamily: "Archivo_500Medium", fontWeight: "normal", fontSize: 40}}>Wallet Setup</Text>
-
 				</View>
-				<View style={{flex: 0.5, justifyContent: "center", paddingHorizontal: 20, paddingVertical: 20}}>
-					<Button title="Using Seed Phrase"/>
+				<View style={{
+					backgroundColor: "red",
+					flex: 1,
+					justifyContent: "center"
+				}}>
+					<View  style={styles.main_container}>
+						<View style={styles.container}>
+							<TextInput
+								style={styles.input}
+								onChangeText={onChangeNumber}
+								value={number}
+								placeholder="useless placeholder"
+								keyboardType="numeric"
+							/>
+						</View>
+						<View style={{height: 20, justifyContent: "end"}}>
+							<Text style={{
+								color: "white",
+								fontFamily: "Archivo_500Medium",
+								fontWeight: "normal",
+								fontsize: 10,
+								paddingLeft: 20,
+							}}>Password strength:</Text>
+							<Ionicons name="md-eye-outline" size={24} color="black" />
+						</View>
+					</View>
 				</View>
-				<View style={{flex: 0.5, justifyContent: "center", paddingHorizontal: 20, paddingBottom: 40}}>
-					<Button title="Create a New Wallet" isLinear={true}/>
+				<View style={{
+					backgroundColor: "yellow",
+					flex: 1,
+					justifyContent: "center",
+					paddingHorizontal: 20,
+					paddingBottom: 40
+				}}>
+				</View>
+				<View style={{
+					backgroundColor: "green",
+					flex: 1,
+					justifyContent: "center",
+					paddingHorizontal: 20,
+					paddingBottom: 40
+				}}>
+				</View>
 			</View>
-		</View>
-</View>);
+		</View>);
 };
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		padding: 10,
-		backgroundColor: "black",
-	},
-});
-
 export default CreatePassword;
