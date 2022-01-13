@@ -2,21 +2,16 @@ import React from "react";
 import {FlatList, View,} from "react-native";
 
 import {Text} from 'react-native-elements';
-import {LinearGradient} from 'expo-linear-gradient';
 import screensStyles from "../CommonStyles";
 import ClickableArea from "../../components/Input/Input"
 import inputStyles from "../../components/Input/InputStyles";
 import {MaterialCommunityIcons, MaterialIcons, SimpleLineIcons} from '@expo/vector-icons';
+import MainBackground from "../../components/MainBackground";
 
 
 const Settings = ({}) => {
     return (
-        <View style={screensStyles.container}>
-            <LinearGradient
-                // Background Linear Gradient
-                colors={['rgba(149,0,133,1)', 'rgba(253,141,2,1)', 'rgba(0,0,0,1)', 'transparent']}
-                style={screensStyles.background}
-            />
+        <MainBackground>
             <View style={screensStyles.viewHeader}>
                 <Text style={screensStyles.viewTitleText} h5>Paramètres</Text>
             </View>
@@ -70,7 +65,7 @@ const Settings = ({}) => {
                           />
                       )}
             />
-        </View>
+        </MainBackground>
     );
 };
 
