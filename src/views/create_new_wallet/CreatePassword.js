@@ -8,30 +8,28 @@ import {
 } from "react-native";
 import {LinearGradient} from 'expo-linear-gradient';
 import {useFonts, Archivo_500Medium} from '@expo-google-fonts/archivo';
-import {Ionicons} from "@expo/vector-icons";
-
-import screensStyles from "../CommonStyles";
-import Image from "react-native-web/dist/vendor/react-native/Animated/components/AnimatedImage";
-import Button from "../../components/Button";
 import commonStyles from "../CommonStyles";
+import Input from "../../components/Input";
+import { Switch } from 'react-native-paper';
 
 const styles = StyleSheet.create({
 	input: {
-		height: 40,
-		margin: 12,
-		borderWidth: 1,
-		padding: 10,
+		color: "white",
+		fontSize: 15,
+		borderWidth: 0,
+		outline: "none",
+		border: "none !important"
 	},
 	container: {
-		height: 64,
+		height: 54,
 		borderWidth: 1,
-		padding: 10,
-		borderRadius: 15,
-		borderColor: "#00ff80"
+		borderRadius: 10,
+		borderColor: "#181E25",
+		justifyContent: "center",
+		flexDirection: "row"
 	},
 	main_container: {
-		height: 84,
-		backgroundColor: "orange"
+		height: 79
 	},
 });
 
@@ -41,6 +39,10 @@ const CreatePassword = () => {
 	});
 	const [text, onChangeText] = React.useState("Useless Text");
 	const [number, onChangeNumber] = React.useState(null);
+	const [isSwitchOn, setIsSwitchOn] = React.useState(false);
+
+	const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+
 	return (
 		<View style={[commonStyles.container, {
 			flexDirection: "column"
@@ -49,31 +51,10 @@ const CreatePassword = () => {
 				<View style={{flex: 1, justifyContent: "center"}}>
 				</View>
 				<View style={{
-					backgroundColor: "red",
 					flex: 1,
 					justifyContent: "center"
 				}}>
-					<View  style={styles.main_container}>
-						<View style={styles.container}>
-							<TextInput
-								style={styles.input}
-								onChangeText={onChangeNumber}
-								value={number}
-								placeholder="useless placeholder"
-								keyboardType="numeric"
-							/>
-						</View>
-						<View style={{height: 20, justifyContent: "end"}}>
-							<Text style={{
-								color: "white",
-								fontFamily: "Archivo_500Medium",
-								fontWeight: "normal",
-								fontsize: 10,
-								paddingLeft: 20,
-							}}>Password strength:</Text>
-							<Ionicons name="md-eye-outline" size={24} color="black" />
-						</View>
-					</View>
+					<Input/>
 				</View>
 				<View style={{
 					backgroundColor: "yellow",
@@ -82,6 +63,7 @@ const CreatePassword = () => {
 					paddingHorizontal: 20,
 					paddingBottom: 40
 				}}>
+					<Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
 				</View>
 				<View style={{
 					backgroundColor: "green",
