@@ -1,6 +1,6 @@
 import {StyleSheet} from "react-native";
 
-const inputStyles = StyleSheet.create({
+const clickableAreaStyles = StyleSheet.create({
     viewLogo: {
         flex: 1,
         flexDirection: 'row',
@@ -18,4 +18,4 @@ const inputStyles = StyleSheet.create({
     }
 });
 
-export default inputStyles;
+export default clickableAreaStyles;

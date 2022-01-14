@@ -22,7 +22,7 @@ const commonStyles = StyleSheet.create({
     viewHeader: {
         paddingTop: 30,
         paddingBottom: 40
-    },
+    }
 
 });
 
