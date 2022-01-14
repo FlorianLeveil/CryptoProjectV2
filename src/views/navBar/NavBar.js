@@ -5,6 +5,7 @@ import Settings from "../settings/Settings";
 import Home from "../home/Home";
 import WalletSetup from "../wallet_setup/WalletSetup";
 import {Entypo, MaterialCommunityIcons} from '@expo/vector-icons';
+import Wallet from "../wallet/Wallet";
 
 const TabNavigator = createBottomTabNavigator();
 
@@ -48,7 +49,7 @@ const Navbar = () => (
         >
             <TabNavigator.Screen
                 name="Wallet"
-                component={Home}
+                component={Wallet}
             />
             <TabNavigator.Screen
                 name="Swap"

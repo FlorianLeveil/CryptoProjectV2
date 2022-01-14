@@ -3,8 +3,8 @@ import {FlatList, View,} from "react-native";
 
 import {Text} from 'react-native-elements';
 import screensStyles from "../CommonStyles";
-import ClickableArea from "../../components/Input/Input"
-import inputStyles from "../../components/Input/InputStyles";
+import ClickableArea from "../../components/ClickableArea/ClickableArea"
+import clickableAreaStyles from "../../components/ClickableArea/ClickableAreaStyles";
 import {MaterialCommunityIcons, MaterialIcons, SimpleLineIcons} from '@expo/vector-icons';
 import MainBackground from "../../components/MainBackground";
 
@@ -58,9 +58,9 @@ const Settings = ({}) => {
                               logo={item.logo}
                               title={item.title}
                               icon={item.icon}
-                              logoStyle={inputStyles.viewLogo}
-                              titleStyle={inputStyles.viewTitle}
-                              iconStyle={inputStyles.viewIcon}
+                              logoStyle={clickableAreaStyles.viewLogo}
+                              titleStyle={clickableAreaStyles.viewTitle}
+                              iconStyle={clickableAreaStyles.viewIcon}
                               containerStyle={item.containerStyle}
                           />
                       )}
