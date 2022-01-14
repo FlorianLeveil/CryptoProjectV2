@@ -5,6 +5,7 @@ import {
 import {useFonts, Archivo_500Medium} from '@expo-google-fonts/archivo';
 import {SimpleLineIcons} from "@expo/vector-icons";
 import { TextInput } from 'react-native-paper';
+import {color} from "react-native-elements/dist/helpers";
 
 
 const inputStyles = StyleSheet.create({
@@ -12,29 +13,15 @@ const inputStyles = StyleSheet.create({
 		fontFamily: "Archivo_500Medium",
 		fontWeight: "normal",
 		fontSize: 10,
-		height: 54,
-	},
-	main_container: {
-		height: 54,
-		justifyContent: "center",
-		flexDirection: "row"
+		height: 42
 	},
 	container: {
-		height: 79
-	},
-	first_text: {
-		color: "#6A84A0",
-		fontFamily: "Archivo_500Medium",
-		fontWeight: "normal",
-		fontSize: 10
-	},
-	left_area: {
-		flex: 8,
 		justifyContent: "center",
-		flexDirection: "column"
+		flexDirection: "column",
+		flex: 1
 	},
 	extra_container: {
-		height: 25,
+		height: 35,
 		justifyContent: "flex-start",
 		paddingLeft: 10,
 		flexDirection: "row"
@@ -53,35 +40,64 @@ const Input = (props) => {
 	useFonts({
 		Archivo_500Medium,
 	});
-	return (
-		<View style={inputStyles.container}>
-			<View style={inputStyles.main_container}>
-				<View style={inputStyles.left_area}>
-						<TextInput
-							label="New Password"
-							style={inputStyles.input}
-							theme={{colors: {
-									primary : "#6A84A0",
-									background : "#292f3a",
-									text : "#6A84A0",
-									placeholder : "#6A84A0"
-								}
-							}}
-							secureTextEntry
-							right={<TextInput.Icon name="eye" color="grey"/>}
-						/>
-				</View>
+
+	const [text, setText] = React.useState('');
+	const [viewPassword, setViewPassword] = React.useState(false);
+
+	let otherArea
+	let green = "#76E268"
+	let yellow = "#ffd500"
+	let red = "#ff0000"
+	let color = red
+	let indice = "Bad"
+
+	if (props.isPassword) {
+		if (text.length > 9 ){
+			color = green
+			indice = "Good"
+		} else if (text.length > 5 ) {
+			color = yellow
+			indice = "Medium"
+		}
+		otherArea = <View style={inputStyles.extra_container}>
+			<View style={inputStyles.extra_area}>
+				<Text style={[inputStyles.extra_area_text, {color: "#6A84A0"}]}>Password strength:</Text>
 			</View>
-			<View style={inputStyles.extra_container}>
-				<View style={inputStyles.extra_area}>
-					<Text style={[inputStyles.extra_area_text, {color: "#6A84A0"}]}>Password strength:</Text>
-				</View>
-				<View style={inputStyles.extra_area}>
-					<Text style={[inputStyles.extra_area_text, {color: "#76E268"}]}> Good</Text>
-				</View>
+			<View style={inputStyles.extra_area}>
+				<Text style={[inputStyles.extra_area_text, {color: color}]}> {indice}</Text>
 			</View>
 		</View>
+	} else if (props.isEmail) {
+		otherArea = <View style={inputStyles.extra_container}>
+			<View style={inputStyles.extra_area}>
+				{/*<Text style={[inputStyles.extra_area_text, {color: "red"}]}>Please enter correct email format !</Text>*/}
+			</View>
+		</View>
+	}
 
+	return (
+		<View style={inputStyles.main_container}>
+			<View style={inputStyles.container}>
+				<TextInput
+					mode="outlined"
+					label={props.label}
+					style={inputStyles.input}
+					theme={{
+						colors: {
+							primary: "#6A84A0",
+							background: "black",
+							text: "#6A84A0",
+							placeholder: "#6A84A0"
+						}
+					}}
+					onChangeText={text => setText(text)}
+					secureTextEntry={props.isPassword && !viewPassword}
+					right={props.isPassword ? <TextInput.Icon name="eye" color="grey" onPress={() => setViewPassword(!viewPassword)}/> : undefined
+					}
+				/>
+			</View>
+			{otherArea}
+		</View>
 	);
 };
 export default Input;

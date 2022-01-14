@@ -13,7 +13,7 @@ const RootTab = createBottomTabNavigator();
 export default function App() {
     return (
         // <CreatePassword/>
-        //	<WalletSetup/>
-        <Navbar/>
+        	<WalletSetup/>
+        // <Navbar/>
     );
 }
