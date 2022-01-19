@@ -21,6 +21,7 @@ const Navbar = () => (
                     paddingBottom: 15,
                     backgroundColor: 'rgba(0,0,0,0)',
                     position: 'absolute',
+                    bottom: 20,
                     borderTopWidth: 0
 
                 },

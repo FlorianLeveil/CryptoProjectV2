@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import { Modalize } from 'react-native-modalize';
+import React, {useRef} from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Modalize} from 'react-native-modalize';
 
 
 const multiSelectStyle = StyleSheet.create({
@@ -12,12 +12,10 @@ const multiSelectStyle = StyleSheet.create({
     modal: {
         backgroundColor: "black"
     },
-    overlay:{
+    overlay: {
         backgroundColor: 'rgba(0, 0, 0, 0)',
     }
 });
-
-
 
 export const MultiSelect = (props) => {
     const modalizeRef = useRef(null);
@@ -26,7 +24,7 @@ export const MultiSelect = (props) => {
         modalizeRef.current?.open();
     };
 
-    const getData = () => ({ name:"antoine" });
+    const getData = () => ({name: "antoine"});
 
     const renderItem = (item) => (
         <View>
@@ -36,7 +34,7 @@ export const MultiSelect = (props) => {
 
     return (
         <>
-            <TouchableOpacity style={props.onPressElementStyle} onPress={onOpen}>
+            <TouchableOpacity onPress={onOpen}>
                 {props.children}
             </TouchableOpacity>
 

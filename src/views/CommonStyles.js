@@ -18,12 +18,13 @@ const commonStyles = StyleSheet.create({
         textAlign: "center",
         fontWeight: "bold",
         color: "white",
+        fontSize: 20
     },
     viewHeader: {
-        paddingTop: 30,
-        paddingBottom: 40
+        maxHeight: 100,
+        height: "100%",
+        justifyContent: "center"
     }
-
 });
 
 export default commonStyles;
