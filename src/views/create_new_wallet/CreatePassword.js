@@ -1,19 +1,13 @@
-import React, {useState} from "react";
-import {
-	Text,
-	View,
-	StyleSheet,
-	TextInput,
-	KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Platform, Pressable, SafeAreaView, ScrollView,
-} from "react-native";
-import {LinearGradient} from 'expo-linear-gradient';
-import {useFonts, Archivo_500Medium} from '@expo-google-fonts/archivo';
+import React from "react";
+import {SafeAreaView, ScrollView, StyleSheet, Text, View,} from "react-native";
+import {Archivo_500Medium, useFonts} from '@expo-google-fonts/archivo';
 import commonStyles from "../CommonStyles";
 import Input from "../../components/Input";
 import {Checkbox, Switch} from 'react-native-paper';
 import Button from "../../components/Button";
 import StepBar from "../../components/StepBar";
 import BackButton from "../../components/BackButton";
+import SecureYourWallet1 from "./SecureYourWallet1";
 
 const styles = StyleSheet.create({
 	input: {
@@ -34,7 +28,7 @@ const styles = StyleSheet.create({
 	}
 });
 
-const CreatePassword = () => {
+const CreatePassword = ({navigation}) => {
 	let [fontsLoaded] = useFonts({
 		Archivo_500Medium,
 	});
@@ -57,7 +51,7 @@ const CreatePassword = () => {
 						height: 50
 					}}>
 						<View style={{flex:1, alignItems: "center", justifyContent: "flex-start", flexDirection: "row"}}>
-							<BackButton />
+							<BackButton onPress={() => navigation.navigate('WalletSetup')}/>
 						</View>
 						<View style={{flex: 3,alignItems: "center", flexDirection: "row", paddingHorizontal: 15}}>
 							<StepBar nbSteps={3} currentStep={1}/>
@@ -126,7 +120,7 @@ const CreatePassword = () => {
 						paddingBottom: 40,
 						height: "100%"
 					}}>
-						<Button title="Create Account" isLinear={true}/>
+						<Button title="Create Account" isLinear={true} onPress={() => navigation.navigate('SecureYourWallet1')}/>
 					</View>
 				</View>
 			</SafeAreaView>

@@ -4,9 +4,11 @@ import {Archivo_500Medium, useFonts} from '@expo-google-fonts/archivo';
 
 import commonStyles from "../CommonStyles";
 import Button from "../../components/Button";
+import {withRouter} from 'react-router-dom';
 
 
-const WalletSetup = () => {
+
+const WalletSetup = ({navigation}) => {
     let [fontsLoaded] = useFonts({
         Archivo_500Medium,
     });
@@ -33,7 +35,7 @@ const WalletSetup = () => {
                     <Button title="Using Seed Phrase"/>
                 </View>
                 <View style={{flex: 0.5, justifyContent: "center", paddingHorizontal: 20, paddingBottom: 40}}>
-                    <Button title="Create a New Wallet" isLinear={true}/>
+                    <Button title="Create a New Wallet" isLinear={true} onPress={() => navigation.navigate('CreatePassword')}/>
                 </View>
             </View>
         </View>);

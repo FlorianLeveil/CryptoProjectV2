@@ -1,19 +1,37 @@
 import React from 'react';
-import {createNativeStackNavigator} from "@react-navigation/native-stack";
-import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import WalletSetup from "./src/views/wallet_setup/WalletSetup";
-import Settings from "./src/views/settings/Settings";
 import CreatePassword from "./src/views/create_new_wallet/CreatePassword";
-import Navbar from "./src/views/navBar/NavBar";
+import {NavigationContainer} from "@react-navigation/native";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import SecureYourWallet1 from "./src/views/create_new_wallet/SecureYourWallet1";
 
-const PlacesStack = createNativeStackNavigator();
-const RootTab = createBottomTabNavigator();
 
+// const AppStack = createStackNavigator({
+// 	BeersList: {
+// 		screen: BeersList,
+// 	},
+// 	BeerAdd: {
+// 		screen: BeerAdd,
+// 	},
+// 	Profile: {
+// 		screen: Profile,
+// 	},
+// });
+
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-    return (
-        // <CreatePassword/>
-        	<WalletSetup/>
-        // <Navbar/>
-    );
+	return (
+		<NavigationContainer>
+			<Stack.Navigator initialRouteName="WalletSetup"   screenOptions={{
+				headerShown: false
+			}}>
+				<Stack.Screen name="WalletSetup" component={WalletSetup}/>
+				<Stack.Screen name="CreatePassword" component={CreatePassword} />
+				<Stack.Screen name="SecureYourWallet1" component={SecureYourWallet1} />
+			</Stack.Navigator>
+		</NavigationContainer>
+	);
 }
+

@@ -11,7 +11,7 @@ import {useFonts, Archivo_500Medium} from '@expo-google-fonts/archivo';
 const buttonStyles = StyleSheet.create({
 	container: {
 		borderRadius: 25,
-		height: '100%',
+		height: 50,
 		width: '100%',
 		maxHeight: 50,
 		justifyContent: "center",
@@ -25,7 +25,7 @@ const buttonStyles = StyleSheet.create({
 	},
 });
 const Button = (props) => {
-	let [fontsLoaded] = useFonts({
+	useFonts({
 		Archivo_500Medium,
 	});
 	if (props.isLinear) {
@@ -36,7 +36,7 @@ const Button = (props) => {
 				start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
 				style={[buttonStyles.container]}
 			>
-				<Pressable style={({pressed}) => [{backgroundColor: pressed ? 'rgba(0,0,0,0.5)' : 'none'}]}>
+				<Pressable onPressIn={props.onPress} style={({pressed}) => [{backgroundColor: pressed ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0)'}, {height: '100%', justifyContent: 'center'}]}>
 					<Text style={[buttonStyles.title, props.style]} selectable={false}>{props.title}</Text>
 				</Pressable>
 			</LinearGradient>

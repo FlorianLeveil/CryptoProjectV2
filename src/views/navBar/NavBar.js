@@ -2,7 +2,6 @@ import React from "react";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {NavigationContainer} from "@react-navigation/native";
 import Settings from "../settings/Settings";
-import Home from "../home/Home";
 import WalletSetup from "../wallet_setup/WalletSetup";
 import {Entypo, MaterialCommunityIcons} from '@expo/vector-icons';
 import Wallet from "../wallet/Wallet";
