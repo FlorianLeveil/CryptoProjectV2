@@ -50,14 +50,19 @@ const Input = (props) => {
 	let red = "#ff0000"
 	let color = red
 	let indice = "Bad"
+	let is_validate = false
 
 	if (props.isPassword) {
 		if (text.length > 9 ){
 			color = green
 			indice = "Good"
+			is_validate = true
 		} else if (text.length > 5 ) {
 			color = yellow
 			indice = "Medium"
+			is_validate = true
+		} else {
+			is_validate = false
 		}
 		otherArea = <View style={inputStyles.extra_container}>
 			<View style={inputStyles.extra_area}>
@@ -67,12 +72,19 @@ const Input = (props) => {
 				<Text style={[inputStyles.extra_area_text, {color: color}]}> {indice}</Text>
 			</View>
 		</View>
+
 	} else if (props.isEmail) {
+		is_validate = text.includes('@') && text.includes('.');
+		let error_msg = is_validate ? <Text></Text> : <Text style={[inputStyles.extra_area_text, {color: "red"}]}>Please enter correct email format !</Text>
 		otherArea = <View style={inputStyles.extra_container}>
 			<View style={inputStyles.extra_area}>
-				{/*<Text style={[inputStyles.extra_area_text, {color: "red"}]}>Please enter correct email format !</Text>*/}
+				{error_msg}
 			</View>
 		</View>
+	}
+
+	if (props.validation) {
+		props.validation(is_validate)
 	}
 
 	return (

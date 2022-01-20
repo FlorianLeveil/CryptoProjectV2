@@ -72,11 +72,7 @@ const getTendencyToString = (percentage) => {
 const CryptoSelected = () => {
     return (
         <View style={SelectedCryptoStyle.selectCryptoContainer}>
-            <GradientText colors={["#0056d8", "#0086f6", "#00acf6", "#00cee4", "#12ebce"]}
-                          start={{x: 0, y: 0}}
-                          end={{x: 1, y: 1}}
-                          style={{flex: 1}}
-                          text={SelectedCryptoStyle.selectCryptoData}
+            <GradientText text={SelectedCryptoStyle.selectCryptoData}
                           viewStyle={SelectedCryptoStyle.viewStyle}
             >
                 9.2362 ETH

@@ -8,6 +8,7 @@ import Button from "../../components/Button";
 import StepBar from "../../components/StepBar";
 import BackButton from "../../components/BackButton";
 import SecureYourWallet1 from "./SecureYourWallet1";
+import GradientText from "../../components/GradiantText";
 
 const styles = StyleSheet.create({
 	input: {
@@ -34,8 +35,11 @@ const CreatePassword = ({navigation}) => {
 	});
 	const [isSwitchOn, setIsSwitchOn] = React.useState(false);
 	const [checked, setChecked] = React.useState(false);
+	const [validateEmail, setValidateEmail] = React.useState(false);
+	const [validatePassword, setValidatePassword] = React.useState(false);
 
 	const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+
 	return (
 		<View style={[commonStyles.container, {
 			flexDirection: "column",
@@ -50,18 +54,28 @@ const CreatePassword = ({navigation}) => {
 						alignItems: "center",
 						height: 50
 					}}>
-						<View style={{flex:1, alignItems: "center", justifyContent: "flex-start", flexDirection: "row"}}>
+						<View
+							style={{flex: 1, alignItems: "center", justifyContent: "flex-start", flexDirection: "row"}}>
 							<BackButton onPress={() => navigation.navigate('WalletSetup')}/>
 						</View>
-						<View style={{flex: 3,alignItems: "center", flexDirection: "row", paddingHorizontal: 15}}>
+						<View style={{flex: 3, alignItems: "center", flexDirection: "row", paddingHorizontal: 15}}>
 							<StepBar nbSteps={3} currentStep={1}/>
 						</View>
-						<View style={{flex:1}}>
+						<View style={{flex: 1}}>
 						</View>
 					</View>
 					<View
-						style={{marginTop: 30, marginBottom: 30, justifyContent: "center", alignItems: "center", paddingHorizontal: 20}}>
-						<Text style={{fontWeight: "600", fontSize: 16, color: "blue"}}>Create Account</Text>
+						style={{
+							marginTop: 30,
+							marginBottom: 30,
+							justifyContent: "center",
+							alignItems: "center",
+							paddingHorizontal: 20,
+							width: "100%"
+						}}>
+						<GradientText>
+							Create Account
+						</GradientText>
 						<Text style={{
 							marginTop: 20,
 							fontSize: 14,
@@ -70,18 +84,19 @@ const CreatePassword = ({navigation}) => {
 							lineHeight: 24
 						}}>This password will unlock your Metamask wallet only on this service</Text>
 					</View>
-					<Input label="New Password" isPassword/>
-					<Input label="Email" isEmail/>
+					<Input label="New Password" validation={setValidatePassword} isPassword/>
+					<Input label="Email" validation={setValidateEmail} isEmail/>
 
-					<View style={{height:50, flexDirection: "row", justifyContent: "space-between"}}>
+					<View style={{height: 50, flexDirection: "row", justifyContent: "space-between"}}>
 						<View style={{justifyContent: "center"}}>
-							<Text style={{fontWeight: "600", fontSize: 16, color: "white"}}>Sign in with Face ID ?</Text>
+							<Text style={{fontWeight: "600", fontSize: 16, color: "white"}}>Sign in with Face ID
+								?</Text>
 						</View>
 						<View style={{justifyContent: "center"}}>
 							<Switch value={isSwitchOn} onValueChange={onToggleSwitch}/>
 						</View>
 					</View>
-					<View style={{marginTop:20,height: 50, flexDirection: "row", justifyContent: "space-between"}}>
+					<View style={{marginTop: 20, height: 50, flexDirection: "row", justifyContent: "space-between"}}>
 						<View style={{justifyContent: "flex-start", alignContent: "flex-start"}}>
 							<Checkbox
 								status={checked ? 'checked' : 'unchecked'}
@@ -120,7 +135,8 @@ const CreatePassword = ({navigation}) => {
 						paddingBottom: 40,
 						height: "100%"
 					}}>
-						<Button title="Create Account" isLinear={true} onPress={() => navigation.navigate('SecureYourWallet1')}/>
+						<Button disabled={!validatePassword || !validateEmail} title="Create Account" isLinear={true}
+								onPress={() => navigation.navigate('SecureYourWallet1')}/>
 					</View>
 				</View>
 			</SafeAreaView>

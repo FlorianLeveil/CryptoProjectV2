@@ -36,14 +36,14 @@ const Button = (props) => {
 				start={{x: 0.0, y: 0.25}} end={{x: 0.5, y: 1.0}}
 				style={[buttonStyles.container]}
 			>
-				<Pressable onPressIn={props.onPress} style={({pressed}) => [{backgroundColor: pressed ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0)'}, {height: '100%', justifyContent: 'center'}]}>
+				<Pressable onPressIn={props.onPress} disabled={props.disabled} style={({pressed}) => [{backgroundColor: pressed  || props.disabled ? 'rgba(0,0,0,0.5)' : 'rgba(0,0,0,0)'}, {height: '100%', justifyContent: 'center'}]}>
 					<Text style={[buttonStyles.title, props.style]} selectable={false}>{props.title}</Text>
 				</Pressable>
 			</LinearGradient>
 		);
 	} else {
 		return (
-			<Pressable style={({pressed}) => [buttonStyles.container,{backgroundColor: pressed ? 'rgba(32,40,50,0.75)' : '#202832'}, props.stylePressable]}>
+			<Pressable disabled={props.disabled} style={({ pressed}) => [buttonStyles.container,{backgroundColor: pressed || props.disabled ? 'rgba(32,40,50,0.75)' : '#202832'}, props.stylePressable]}>
 				<Text style={[buttonStyles.title, props.styleTitle]} selectable={false}>{props.title}</Text>
 			</Pressable>
 		);
