@@ -5,7 +5,7 @@ import {
  Pressable,
 } from "react-native";
 import {LinearGradient} from 'expo-linear-gradient';
-import {useFonts, Archivo_500Medium} from '@expo-google-fonts/archivo';
+import {useFonts, Archivo_500Medium, Archivo_700Bold} from '@expo-google-fonts/archivo';
 
 
 const buttonStyles = StyleSheet.create({
@@ -19,14 +19,15 @@ const buttonStyles = StyleSheet.create({
 	title: {
 		textAlign: "center",
 		color: "white",
-		fontFamily: "Archivo_500Medium",
+		fontFamily: "Archivo_700Bold",
 		fontSize: 16,
-		fontWeight: "bold"
+		fontWeight: "800"
 	},
 });
 const Button = (props) => {
 	useFonts({
 		Archivo_500Medium,
+		Archivo_700Bold
 	});
 	if (props.isLinear) {
 		return (
@@ -43,7 +44,7 @@ const Button = (props) => {
 		);
 	} else {
 		return (
-			<Pressable disabled={props.disabled} style={({ pressed}) => [buttonStyles.container,{backgroundColor: pressed || props.disabled ? 'rgba(32,40,50,0.75)' : '#202832'}, props.stylePressable]}>
+			<Pressable onPressIn={props.onPress} disabled={props.disabled} style={({ pressed}) => [buttonStyles.container,{backgroundColor: pressed || props.disabled ? 'rgba(32,40,50,0.75)' : '#202832'}, props.stylePressable]}>
 				<Text style={[buttonStyles.title, props.styleTitle]} selectable={false}>{props.title}</Text>
 			</Pressable>
 		);

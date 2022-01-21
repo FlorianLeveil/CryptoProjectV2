@@ -48,22 +48,23 @@ const CreatePassword = ({navigation}) => {
 		}]}>
 			<SafeAreaView style={{flex: 1, maxWidth: 600}}>
 				<View style={{height: 20}}></View>
-				<ScrollView style={{flexGrow: 1}}>
-					<View style={{
-						flexDirection: "row",
-						alignItems: "center",
-						height: 50
-					}}>
-						<View
-							style={{flex: 1, alignItems: "center", justifyContent: "flex-start", flexDirection: "row"}}>
-							<BackButton onPress={() => navigation.navigate('WalletSetup')}/>
-						</View>
-						<View style={{flex: 3, alignItems: "center", flexDirection: "row", paddingHorizontal: 15}}>
-							<StepBar nbSteps={3} currentStep={1}/>
-						</View>
-						<View style={{flex: 1}}>
-						</View>
+				<View style={{
+					flexDirection: "row",
+					alignItems: "center",
+					height: 50
+				}}>
+					<View
+						style={{flex: 1, alignItems: "center", justifyContent: "flex-start", flexDirection: "row"}}>
+						<BackButton onPress={() => navigation.navigate('WalletSetup')}/>
 					</View>
+					<View style={{flex: 3, alignItems: "center", flexDirection: "row", paddingHorizontal: 15}}>
+						<StepBar nbSteps={3} currentStep={1}/>
+					</View>
+					<View style={{flex: 1}}>
+					</View>
+				</View>
+				<ScrollView style={{flexGrow: 1}}>
+
 					<View
 						style={{
 							marginTop: 30,
@@ -98,7 +99,8 @@ const CreatePassword = ({navigation}) => {
 					</View>
 					<View style={{marginTop: 20, height: 50, flexDirection: "row", justifyContent: "space-between"}}>
 						<View style={{justifyContent: "flex-start", alignContent: "flex-start"}}>
-							<Checkbox
+							<Checkbox.Item
+								mode="android"
 								status={checked ? 'checked' : 'unchecked'}
 								theme={{
 									colors: {

@@ -13,6 +13,7 @@ const GradientText = (props) => (
             start={props.start || {x: 0, y: 0}}
             end={props.end || {x: 1, y: 1}}
             style={[{width: '100%', height: 40}, props.viewStyle]}
+            locations={props.locations}
         />
     </MaskedView>
 );
