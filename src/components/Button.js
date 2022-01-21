@@ -1,7 +1,6 @@
 import React from "react";
 import {Pressable, StyleSheet, Text} from "react-native";
 import {LinearGradient} from 'expo-linear-gradient';
-import {useFonts, Archivo_500Medium, Archivo_700Bold} from '@expo-google-fonts/archivo';
 
 
 const buttonStyles = StyleSheet.create({
@@ -17,14 +16,9 @@ const buttonStyles = StyleSheet.create({
 		color: "white",
 		fontFamily: "Archivo_700Bold",
 		fontSize: 16,
-		fontWeight: "800"
 	},
 });
 const Button = (props) => {
-	useFonts({
-		Archivo_500Medium,
-		Archivo_700Bold
-	});
 	if (props.isLinear) {
 		return (
 			<LinearGradient

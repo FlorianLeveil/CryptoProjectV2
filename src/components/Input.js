@@ -52,41 +52,44 @@ const Input = (props) => {
 	let indice = "Bad"
 	let is_validate = false
 
-	if (props.isPassword) {
-		if (text.length > 9 ){
-			color = green
-			indice = "Good"
-			is_validate = true
-		} else if (text.length > 5 ) {
-			color = yellow
-			indice = "Medium"
-			is_validate = true
-		} else {
-			is_validate = false
+	if (!props.forLogin) {
+		if (props.isPassword) {
+			if (text.length > 9 ){
+				color = green
+				indice = "Good"
+				is_validate = true
+			} else if (text.length > 5 ) {
+				color = yellow
+				indice = "Medium"
+				is_validate = true
+			} else {
+				is_validate = false
+			}
+			otherArea = <View style={inputStyles.extra_container}>
+				<View style={inputStyles.extra_area}>
+					<Text style={[inputStyles.extra_area_text, {color: "#6A84A0"}]}>Password strength:</Text>
+				</View>
+				<View style={inputStyles.extra_area}>
+					<Text style={[inputStyles.extra_area_text, {color: color}]}> {indice}</Text>
+				</View>
+			</View>
+
+		} else if (props.isEmail) {
+			is_validate = text.includes('@') && text.includes('.');
+			let error_msg = is_validate ? <Text></Text> : <Text style={[inputStyles.extra_area_text, {color: "red"}]}>Please enter correct email format !</Text>
+			otherArea = <View style={inputStyles.extra_container}>
+				<View style={inputStyles.extra_area}>
+					{error_msg}
+				</View>
+			</View>
 		}
-		otherArea = <View style={inputStyles.extra_container}>
-			<View style={inputStyles.extra_area}>
-				<Text style={[inputStyles.extra_area_text, {color: "#6A84A0"}]}>Password strength:</Text>
-			</View>
-			<View style={inputStyles.extra_area}>
-				<Text style={[inputStyles.extra_area_text, {color: color}]}> {indice}</Text>
-			</View>
-		</View>
-
-	} else if (props.isEmail) {
-		is_validate = text.includes('@') && text.includes('.');
-		let error_msg = is_validate ? <Text></Text> : <Text style={[inputStyles.extra_area_text, {color: "red"}]}>Please enter correct email format !</Text>
-		otherArea = <View style={inputStyles.extra_container}>
-			<View style={inputStyles.extra_area}>
-				{error_msg}
-			</View>
-		</View>
+		if (props.validation) {
+			props.validation(is_validate)
+		}
 	}
-
-	if (props.validation) {
-		props.validation(is_validate)
+	if (props.getCurrentValue) {
+		props.getCurrentValue(text)
 	}
-
 	return (
 		<View style={inputStyles.main_container}>
 			<View style={inputStyles.container}>

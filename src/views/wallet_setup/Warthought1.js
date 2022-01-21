@@ -1,19 +1,14 @@
 import React from "react";
 import {Text, View, Image} from "react-native";
-import {Archivo_500Medium, useFonts} from '@expo-google-fonts/archivo';
 
 import commonStyles from "../CommonStyles";
 import Button from "../../components/Button";
-import {withRouter} from 'react-router-dom';
 import GradiantText from "../../components/GradiantText";
 import StepBar from "../../components/StepBar";
 
 
 
 const Warthought1 = ({navigation}) => {
-    let [fontsLoaded] = useFonts({
-        Archivo_500Medium,
-    });
     return (
         <View style={[commonStyles.container, {
             flexDirection: "column"

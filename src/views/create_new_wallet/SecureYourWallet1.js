@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import {Image, SafeAreaView, ScrollView, StyleSheet, Text, View,} from "react-native";
-import {Archivo_500Medium, useFonts} from '@expo-google-fonts/archivo';
 import commonStyles from "../CommonStyles";
 import {Checkbox} from 'react-native-paper';
 import Button from "../../components/Button";
@@ -28,9 +27,6 @@ const styles = StyleSheet.create({
 
 
 const SecureYourWallet1 = ({navigation}) => {
-	let [fontsLoaded] = useFonts({
-		Archivo_500Medium,
-	});
 	const [openModal, setopenModal] = useState(false);
 
 	const onOpen = () => {
@@ -51,7 +47,10 @@ const SecureYourWallet1 = ({navigation}) => {
 		setopenModal2(false);
 	};
 	const [checked, setChecked] = React.useState(false);
-
+	const skip = () => {
+		onDismiss2
+		navigation.navigate('SecureYourWallet1')
+	}
 	return (
 		<View style={[commonStyles.container, {
 			flexDirection: "column",
@@ -141,7 +140,7 @@ const SecureYourWallet1 = ({navigation}) => {
 					</View>
 					<View style={{marginTop: 30, flexDirection: "row", justifyContent: "center", alignItems: "center"}}>
 						<View style={{flex:1}}><Text style={{color: "#5F97FF", fontSize: 20, fontWeight: "600", alignSelf: "center"}} onPress={onDismiss2}>Secure</Text></View>
-						<View style={{flex: 1}}><Button disabled={!checked} title="Skip" isLinear={true}/></View>
+						<View style={{flex: 1}}><Button disabled={!checked} title="Skip" isLinear={true} onPess={skip}/></View>
 					</View>
 				</ModalBottom>
 			)}

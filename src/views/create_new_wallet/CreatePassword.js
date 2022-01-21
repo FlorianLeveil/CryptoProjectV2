@@ -1,14 +1,13 @@
 import React from "react";
 import {SafeAreaView, ScrollView, StyleSheet, Text, View,} from "react-native";
-import {Archivo_500Medium, useFonts} from '@expo-google-fonts/archivo';
 import commonStyles from "../CommonStyles";
 import Input from "../../components/Input";
 import {Checkbox, Switch} from 'react-native-paper';
 import Button from "../../components/Button";
 import StepBar from "../../components/StepBar";
 import BackButton from "../../components/BackButton";
-import SecureYourWallet1 from "./SecureYourWallet1";
 import GradientText from "../../components/GradiantText";
+import {createUser, signUserIn} from "../../firebase/firebase";
 
 const styles = StyleSheet.create({
 	input: {
@@ -30,16 +29,18 @@ const styles = StyleSheet.create({
 });
 
 const CreatePassword = ({navigation}) => {
-	let [fontsLoaded] = useFonts({
-		Archivo_500Medium,
-	});
 	const [isSwitchOn, setIsSwitchOn] = React.useState(false);
 	const [checked, setChecked] = React.useState(false);
 	const [validateEmail, setValidateEmail] = React.useState(false);
 	const [validatePassword, setValidatePassword] = React.useState(false);
+	const [password, setPassword] = React.useState('');
+	const [email, setEmail] = React.useState('');
 
 	const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
 
+	const createAnUser = () => {
+		createUser(email, password).then(() => navigation.navigate('SecureYourWallet1'))
+	}
 	return (
 		<View style={[commonStyles.container, {
 			flexDirection: "column",
@@ -85,8 +86,8 @@ const CreatePassword = ({navigation}) => {
 							lineHeight: 24
 						}}>This password will unlock your Metamask wallet only on this service</Text>
 					</View>
-					<Input label="New Password" validation={setValidatePassword} isPassword/>
-					<Input label="Email" validation={setValidateEmail} isEmail/>
+					<Input label="Email" getCurrentValue={setEmail} validation={setValidateEmail} isEmail/>
+					<Input label="New Password" getCurrentValue={setPassword} validation={setValidatePassword} isPassword/>
 
 					<View style={{height: 50, flexDirection: "row", justifyContent: "space-between"}}>
 						<View style={{justifyContent: "center"}}>
@@ -128,17 +129,15 @@ const CreatePassword = ({navigation}) => {
 						</View>
 					</View>
 				</ScrollView>
-
-
-				<View style={{height: 120}}>
+				<View style={{height: 80}}>
 					<View style={{
 						flex: 1,
 						justifyContent: "flex-end",
-						paddingBottom: 40,
+						paddingBottom: 20,
 						height: "100%"
 					}}>
-						<Button disabled={!validatePassword || !validateEmail} title="Create Account" isLinear={true}
-								onPress={() => navigation.navigate('SecureYourWallet1')}/>
+						<Button disabled={!validatePassword || !validateEmail || !checked} title="Create Account" isLinear={true}
+								onPress={createAnUser}/>
 					</View>
 				</View>
 			</SafeAreaView>

@@ -4,16 +4,12 @@ import {Archivo_500Medium, useFonts} from '@expo-google-fonts/archivo';
 
 import commonStyles from "../CommonStyles";
 import Button from "../../components/Button";
-import {withRouter} from 'react-router-dom';
 import GradiantText from "../../components/GradiantText";
 import StepBar from "../../components/StepBar";
 
 
 
 const Warthought2 = ({navigation}) => {
-    let [fontsLoaded] = useFonts({
-        Archivo_500Medium,
-    });
     return (
         <View style={[commonStyles.container, {
             flexDirection: "column"
