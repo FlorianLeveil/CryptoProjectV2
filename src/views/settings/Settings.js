@@ -3,8 +3,7 @@ import {FlatList, ScrollView, StyleSheet, View,} from "react-native";
 
 import {Text} from 'react-native-elements';
 import screensStyles from "../CommonStyles";
-import ClickableArea from "../../components/ClickableArea/ClickableArea"
-import clickableAreaStyles from "../../components/ClickableArea/ClickableAreaStyles";
+import {MultipleViewSameLine} from "../../components/MultipleViewSameLine"
 import {MaterialCommunityIcons, MaterialIcons, SimpleLineIcons} from '@expo/vector-icons';
 import MainBackground from "../../components/MainBackground";
 
@@ -12,10 +11,20 @@ const settingStyles = StyleSheet.create({
     container: {
         maxWidth: 600,
         width: "100%",
-        flexGrow: 1
     },
 });
 
+const clickableAreaStyles = StyleSheet.create({
+    viewLogo: {
+        flex: 1,
+    },
+    viewTitle: {
+        flex: 8,
+    },
+    viewIcon: {
+        flex: 1,
+    }
+});
 
 const Settings = ({}) => {
     return (
@@ -72,10 +81,10 @@ const Settings = ({}) => {
                     },
                 ]}
                           renderItem={({item}) => (
-                              <ClickableArea
-                                  logo={item.logo}
-                                  title={item.title}
-                                  icon={item.icon}
+                              <MultipleViewSameLine
+                                  firstView={item.logo}
+                                  secondView={item.title}
+                                  thirdView={item.icon}
                                   logoStyle={clickableAreaStyles.viewLogo}
                                   titleStyle={clickableAreaStyles.viewTitle}
                                   iconStyle={clickableAreaStyles.viewIcon}

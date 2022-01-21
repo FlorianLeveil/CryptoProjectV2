@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import WalletSetup from "./src/views/wallet_setup/WalletSetup";
 import CreatePassword from "./src/views/create_new_wallet/CreatePassword";
 import {NavigationContainer} from "@react-navigation/native";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import SecureYourWallet1 from "./src/views/create_new_wallet/SecureYourWallet1";
 import Navbar from "./src/views/navBar/NavBar";
+import {getCrypto} from "./src/api/cryptoApi";
+import {AsyncStorage} from "react-native";
 
 
 // const AppStack = createStackNavigator({
@@ -20,9 +22,14 @@ import Navbar from "./src/views/navBar/NavBar";
 // });
 
 
+
+
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+
+
 	return (
 		// <NavigationContainer>
 		// 	<Stack.Navigator initialRouteName="WalletSetup"   screenOptions={{

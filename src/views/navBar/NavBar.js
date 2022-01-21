@@ -1,66 +1,117 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {NavigationContainer} from "@react-navigation/native";
 import Settings from "../settings/Settings";
 import WalletSetup from "../wallet_setup/WalletSetup";
 import {Entypo, MaterialCommunityIcons} from '@expo/vector-icons';
 import Wallet from "../wallet/Wallet";
+import GradiantIcon from "../../components/GradiantIcon";
+import GradiantText from "../../components/GradiantText";
+import {StyleSheet, Text} from "react-native";
+import {getCrypto} from "../../api/cryptoApi";
 
 const TabNavigator = createBottomTabNavigator();
 
+const navStyles = StyleSheet.create({
+    label: {
+        fontWeight: "bold",
+        fontSize: 10,
+    },
+    gradiantText: {
+        maxHeight: 20
+    },
+    gradiantIcon: {
+        maxHeight: 30
+    }
+})
 
-const Navbar = () => (
-    <NavigationContainer>
-        <TabNavigator.Navigator
-            screenOptions={({route}) => ({
-                headerShown: false,
-                tabBarStyle: {
-                    height: 50,
-                    paddingHorizontal: 5,
-                    paddingTop: 0,
-                    paddingBottom: 15,
-                    backgroundColor: 'rgba(0,0,0,0)',
-                    position: 'absolute',
-                    bottom: 20,
-                    borderTopWidth: 0
 
-                },
-                tabBarLabelStyle: {
-                    fontWeight: "bold"
-                },
-                tabBarActiveTintColor: "gray",
-                tabBarInactiveTintColor: "gray",
-                tabBarIcon: ({}) => {
-                    let to_return;
+const Navbar = () => {
+    const [loading, setLoading] = useState(true);
+    const [cryptos, setCryptos] = useState([])
+    const handleCrypto = async () => {
+        const apiCryptos = await getCrypto()
+        setCryptos(apiCryptos)
+    };
 
-                    if (route.name === "Wallet") {
-                        to_return = <Entypo name="wallet" size={24} color="grey"/>;
-                    } else if (route.name === "Swap") {
-                        to_return =
-                            <MaterialCommunityIcons name="swap-horizontal-circle-outline" size={24} color="grey"/>
-                    } else if (route.name === "Settings") {
-                        to_return = <MaterialCommunityIcons name="nut" size={24} color="grey"/>
+    useEffect(async () => {
+        const launch = async () => {
+            await handleCrypto();
+            setLoading(false);
+        };
+        await launch();
+    }, []);
+
+    return (
+
+        <NavigationContainer>
+            <TabNavigator.Navigator
+                screenOptions={({route}) => ({
+                    headerShown: false,
+                    tabBarLabel: ({focused}) => {
+                        let selectedColors = ["#5ffbf1", "#16e8ff", "#3ed0ff", "#80b4ff", "#b194e8", "#cf82cf", "#e371ad", "#eb6687", "#f4696c", "#f4744e", "#ea832f", "#d69500"];
+                        let colors = ["#808080", "#808080"];
+
+                        if (focused) {
+                            colors = selectedColors
+                        }
+                        return <GradiantText viewStyle={navStyles.gradiantText} colors={colors}>
+                            <Text style={navStyles.label}>{route.name}</Text>
+                        </GradiantText>
+                    },
+                    tabBarStyle: {
+                        height: 80,
+                        paddingTop: 0,
+                        backgroundColor: 'rgba(0,0,0,1)',
+                        position: 'absolute',
+                        borderTopWidth: 0,
+                    },
+                    tabBarLabelStyle: {
+                        fontWeight: "bold",
+                    },
+                    tabBarActiveTintColor: "gray",
+                    tabBarInactiveTintColor: "gray",
+                    tabBarIcon: ({focused}) => {
+                        let to_return;
+                        let selectedColors = ["#5ffbf1", "#16e8ff", "#3ed0ff", "#80b4ff", "#b194e8", "#cf82cf", "#e371ad", "#eb6687", "#f4696c", "#f4744e", "#ea832f", "#d69500"];
+                        let colors = ["#808080", "#808080"];
+
+                        if (focused) {
+                            colors = selectedColors
+                        }
+
+                        if (route.name === "Wallet") {
+                            to_return = <Entypo name="wallet" size={24} color="grey"/>
+                        } else if (route.name === "Swap") {
+                            to_return =
+                                <MaterialCommunityIcons name="swap-horizontal-circle-outline" size={24} color="grey"/>
+                        } else if (route.name === "Settings") {
+                            to_return = <MaterialCommunityIcons name="nut" size={24} color="grey"/>
+                        }
+                        return (
+                            <GradiantIcon viewStyle={navStyles.gradiantIcon} colors={colors}>
+                                {to_return}
+                            </GradiantIcon>
+                        );
                     }
-                    return (
-                        to_return
-                    );
-                }
-            })}
-        >
-            <TabNavigator.Screen
-                name="Wallet"
-                component={Wallet}
-            />
-            <TabNavigator.Screen
-                name="Swap"
-                component={WalletSetup}
-            />
-            <TabNavigator.Screen
-                name="Settings"
-                component={Settings}
-            />
-        </TabNavigator.Navigator>
-    </NavigationContainer>
-);
+                })}
+            >
+                <TabNavigator.Screen
+                    name="Wallet"
+                    component={Wallet}
+                    initialParams={{"cryptos": cryptos}}
+                />
+                <TabNavigator.Screen
+                    name="Swap"
+                    component={WalletSetup}
+                />
+                <TabNavigator.Screen
+                    name="Settings"
+                    component={Settings}
+                />
+            </TabNavigator.Navigator>
+        </NavigationContainer>
+    )
+};
 
 export default Navbar;

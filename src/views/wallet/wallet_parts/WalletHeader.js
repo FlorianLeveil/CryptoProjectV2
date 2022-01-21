@@ -1,5 +1,5 @@
 import React from "react";
-import {StyleSheet, Text, View} from "react-native";
+import {Image, StyleSheet, Text, View} from "react-native";
 import {MultiSelect} from "../../../components/MultiSelect";
 import {MaterialIcons} from "@expo/vector-icons";
 
@@ -19,6 +19,10 @@ const headerStyles = StyleSheet.create({
             flexDirection: 'row',
             flexWrap: "wrap",
             justifyContent: 'center',
+            borderRadius: 40,
+            overflow: "hidden",
+            height: 40,
+            width: 60,
         },
         viewCrypto: {
             flex: 9,
@@ -34,6 +38,13 @@ const headerStyles = StyleSheet.create({
         viewArrowIcon: {
             paddingLeft: 5
         },
+        image: {
+            width: 40,
+            height: 50,
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: 40
+        }
     })
 ;
 
@@ -41,9 +52,9 @@ const WalletHeader = () => {
     return (
         <View style={headerStyles.headerContainer}>
             <View style={headerStyles.viewUser}>
-                <Text>
-                    UserLogged
-                </Text>
+                <Image
+                    style={headerStyles.image}
+                    source={require('../../pictures/1555333244267.jpg')}/>
             </View>
             <View style={headerStyles.viewCrypto}>
                 <MultiSelect title="Cryptos">

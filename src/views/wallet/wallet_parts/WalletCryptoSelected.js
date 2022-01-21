@@ -1,13 +1,14 @@
 import React from "react";
 import {StyleSheet, Text, View} from "react-native";
 import GradientText from "../../../components/GradiantText";
+import {getStyleColorTendency, getTendencyToString} from "../WalletUtils";
 
 
 const SelectedCryptoStyle = StyleSheet.create({
         selectCryptoContainer: {
             flex: 1,
             flexGrow: 1,
-            maxHeight: 80,
+            maxHeight: 110,
         },
         selectCryptoData: {
             fontSize: 40,
@@ -30,46 +31,15 @@ const SelectedCryptoStyle = StyleSheet.create({
             justifyContent: 'center',
             maxHeight: 20
         },
-
         viewStyle: {
             flex: 1,
-            maxHeight: 70
+            maxHeight: 60
         },
-        priceIncrease: {
-            color: "#00f62b"
-        },
-        priceDecrease: {
-            color: "red",
-        }
     })
 ;
 
-const getStyleColorTendency = (percentage) => {
-    let to_return;
-    percentage = parseFloat(percentage)
 
-    if (percentage > 0) {
-        to_return = SelectedCryptoStyle.priceIncrease
-    } else {
-        to_return = SelectedCryptoStyle.priceDecrease
-    }
-    return to_return
-}
-
-const getTendencyToString = (percentage) => {
-    let to_return;
-    percentage = parseFloat(percentage)
-
-    if (percentage > 0) {
-        to_return = "+"
-    } else {
-        to_return = ""
-    }
-    return to_return + percentage.toString() + "%"
-
-}
-
-const CryptoSelected = () => {
+const WalletCryptoSelected = () => {
     return (
         <View style={SelectedCryptoStyle.selectCryptoContainer}>
             <GradientText text={SelectedCryptoStyle.selectCryptoData}
@@ -89,4 +59,4 @@ const CryptoSelected = () => {
     )
 }
 
-export default CryptoSelected;
+export default WalletCryptoSelected;
