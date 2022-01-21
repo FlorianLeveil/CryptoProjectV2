@@ -20,10 +20,18 @@ const StepBar = (props) => {
 
 	for (let i = 1; i < nb_steps; i++) {
 		if (i < current_step) {
-			to_return.push(blue_line)
+			if (!props.withoutLine) {
+				to_return.push(blue_line)
+			} else {
+				to_return.push(<View style={{flexGrow: 1}}></View>)
+			}
 			to_return.push(blue_cercle)
 		} else {
-			to_return.push(grey_line)
+			if (!props.withoutLine) {
+				to_return.push(grey_line)
+			} else {
+				to_return.push(<View style={{flexGrow: 1}}></View>)
+			}
 			to_return.push(grey_cercle)
 		}
 	}

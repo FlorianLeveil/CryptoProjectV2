@@ -104,7 +104,7 @@ const Input = (props) => {
 					}}
 					onChangeText={text => setText(text)}
 					secureTextEntry={props.isPassword && !viewPassword}
-					right={props.isPassword ? <TextInput.Icon name="eye" color="grey" onPress={() => setViewPassword(!viewPassword)}/> : undefined
+					right={props.isPassword ? <TextInput.Icon name="eye" color="grey" style={{justifyContent: "flex-end", paddingBottom: 2}} onPress={() => setViewPassword(!viewPassword)}/> : undefined
 					}
 				/>
 			</View>
