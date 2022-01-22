@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {NavigationContainer} from "@react-navigation/native";
 import Settings from "../settings/Settings";
@@ -8,7 +8,6 @@ import Wallet from "../wallet/Wallet";
 import GradiantIcon from "../../components/GradiantIcon";
 import GradiantText from "../../components/GradiantText";
 import {StyleSheet, Text} from "react-native";
-import {getCrypto} from "../../api/cryptoApi";
 
 const TabNavigator = createBottomTabNavigator();
 
@@ -26,23 +25,7 @@ const navStyles = StyleSheet.create({
 })
 
 
-const Navbar = () => {
-    const [loading, setLoading] = useState(true);
-    const [cryptos, setCryptos] = useState([])
-    const handleCrypto = async () => {
-        const apiCryptos = await getCrypto()
-        setCryptos(apiCryptos)
-    };
-
-    useEffect(async () => {
-        const launch = async () => {
-            await handleCrypto();
-            setLoading(false);
-        };
-        await launch();
-    }, []);
-
-    return (
+const Navbar = () => (
 
         <NavigationContainer>
             <TabNavigator.Navigator
@@ -99,7 +82,6 @@ const Navbar = () => {
                 <TabNavigator.Screen
                     name="Wallet"
                     component={Wallet}
-                    initialParams={{"cryptos": cryptos}}
                 />
                 <TabNavigator.Screen
                     name="Swap"
@@ -112,6 +94,6 @@ const Navbar = () => {
             </TabNavigator.Navigator>
         </NavigationContainer>
     )
-};
+;
 
 export default Navbar;

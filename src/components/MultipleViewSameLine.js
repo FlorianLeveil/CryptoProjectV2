@@ -5,7 +5,7 @@ import React from "react";
 const defaultStyles = StyleSheet.create({
     viewText: {
         color: "white",
-        fontWeight: "bold",
+        fontWeight: "bold"
     },
     container: {
         flexDirection: "row",
@@ -42,6 +42,14 @@ const renderSimpleView = (item, itemStyle, isText = true, textStyle = null) => {
     )
 }
 
+const renderImageView = (item, itemStyle) => {
+    return (
+        <View style={itemStyle}>
+            {item}
+        </View>
+    )
+}
+
 
 const renderSimpleViewCryptoWithPriceAndPercentage = (item, itemStyle, cryptoPrice, cryptoPercentage, cryptoPriceStyle, cryptoPercentageStyle, cryptoAndPriceContainerStyle, textStyle = null, moreInfoStyle = null) => {
     return (
@@ -65,9 +73,9 @@ export const MultipleViewSameLine = (props) => {
 export const MultipleViewCryptoWithPriceAndPercentage = (props) => {
     return (
         <View style={[defaultStyles.container, props.containerStyle]}>
-            {renderSimpleView(props.firstView, props.logoStyle, props.isText, props.textStyle)}
+            {renderImageView(props.firstView, props.logoStyle)}
             {renderSimpleViewCryptoWithPriceAndPercentage(props.secondView, props.titleStyle, props.cryptoPrice, props.cryptoPercentage, props.cryptoPriceStyle, props.cryptoPercentageStyle, props.cryptoAndPriceContainerStyle)}
-            {renderSimpleView(props.thirdView, props.iconStyle, props.isText, props.textStyle)}
+            {renderSimpleView(props.thirdView, props.iconStyle, props.isText, props.thirdTextStyle)}
         </View>
     )
 }

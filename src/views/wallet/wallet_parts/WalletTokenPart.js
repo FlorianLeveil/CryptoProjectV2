@@ -1,9 +1,11 @@
-import {getStyleColorTendency, getTendencyToString} from "../WalletUtils";
+import {getRoundedInt, getStyleColorTendency, getTendencyToString} from "../WalletUtils";
 import React from "react";
-import {FlatList, ScrollView, StyleSheet, Text, View} from "react-native";
+import {FlatList, Image, ScrollView, StyleSheet, Text, View} from "react-native";
 import {FontAwesome5} from "@expo/vector-icons";
 import {MultipleViewCryptoWithPriceAndPercentage} from "../../../components/MultipleViewSameLine";
 import Button from "../../../components/Button";
+
+import {SvgUri,} from 'react-native-svg';
 
 
 const TokenPartStyle = StyleSheet.create({
@@ -34,10 +36,8 @@ const TokenPartStyle = StyleSheet.create({
         width: "100%",
     },
     viewNbToken: {
-        flexWrap: "wrap",
         maxWidth: 100,
         width: "100%",
-        alignItems: "flex-start"
     },
     price: {
         color: "#8fa2b7",
@@ -68,11 +68,34 @@ const TokenPartStyle = StyleSheet.create({
         maxHeight: 2,
         backgroundColor: "white",
         height: "100%"
+    },
+    nbToken: {
+        textAlign: "right"
     }
 })
 
+const oldData = [
+    {
+        id: 0,
+        logo: <FontAwesome5 name="bitcoin" size={35} color="white"/>,
+        title: 'Bitcoin',
+        nbToken: "19.2371 BTC", // TODO ajouter le sigle de la crypto
+        price: "€226.69",
+        tendency: "2"
+    }
+]
 
-const WalletTokenPart = ({}) => {
+const getSvg = (logoUrl) => {
+    let imageType = logoUrl.split(".")
+    if (imageType[imageType.length - 1] === "svg") {
+        return (<SvgUri width="40" height="40" uri={logoUrl}/>)
+    }
+    return (<Image
+        source={{uri: logoUrl}}
+        style={{maxWidth: 40, maxHeight: 40, height: "100%", width: "100%"}}/>)
+}
+
+const WalletTokenPart = (props) => {
     return (
         <View style={TokenPartStyle.tokenContainer}>
             <View style={TokenPartStyle.titleContainer}>
@@ -83,85 +106,23 @@ const WalletTokenPart = ({}) => {
             <View style={TokenPartStyle.lineContainer}/>
             <ScrollView>
                 <FlatList
-                    data={[
-                        {
-                            id: 0,
-                            logo: <FontAwesome5 name="bitcoin" size={35} color="white"/>,
-                            title: 'Bitcoin',
-                            nbToken: "19.2371 BTC", // TODO ajouter le sigle de la crypto
-                            price: "€226.69",
-                            tendency: "2"
-                        },
-                        {
-                            id: 1,
-                            logo: <FontAwesome5 name="bitcoin" size={35} color="white"/>,
-                            title: 'Bitcoin',
-                            nbToken: "19.2371 BTC", // TODO ajouter le sigle de la crypto,
-                            price: "€226.69",
-                            tendency: "2"
-                        },
-                        {
-                            id: 2,
-                            logo: <FontAwesome5 name="bitcoin" size={35} color="white"/>,
-                            title: 'Bitcoin',
-                            nbToken: "19.2371 BTC", // TODO ajouter le sigle de la crypto
-                            price: "€226.69",
-                            tendency: "2"
-                        },
-                        {
-                            id: 3,
-                            logo: <FontAwesome5 name="bitcoin" size={35} color="white"/>,
-                            title: 'Bitcoin',
-                            nbToken: "19.2371 BTC", // TODO ajouter le sigle de la crypto
-                            price: "€226.69",
-                            tendency: "2"
-                        },
-                        {
-                            id: 4,
-                            logo: <FontAwesome5 name="bitcoin" size={35} color="white"/>,
-                            title: 'Bitcoin',
-                            nbToken: "19.2371 BTC", // TODO ajouter le sigle de la crypto
-                            price: "€226.69",
-                            tendency: "2"
-                        },
-                        {
-                            id: 5,
-                            logo: <FontAwesome5 name="bitcoin" size={35} color="white"/>,
-                            title: 'Bitcoin',
-                            nbToken: "19.2371 BTC", // TODO ajouter le sigle de la crypto
-                            price: "€226.69",
-                            tendency: "2"
-                        },
-                        {
-                            id: 6,
-                            logo: <FontAwesome5 name="bitcoin" size={35} color="white"/>,
-                            title: 'Bitcoin',
-                            nbToken: "19.2371 BTC", // TODO ajouter le sigle de la crypto
-                            price: "€226.69",
-                            tendency: "2",
-                        },
-                        {
-                            id: 7,
-                            logo: <FontAwesome5 name="bitcoin" size={35} color="white"/>,
-                            title: 'Bitcoin',
-                            nbToken: "19.2371 BTC", // TODO ajouter le sigle de la crypto
-                            price: "€226.69",
-                            tendency: "2",
-                        }
-                    ]}
+                    data={props.cryptos}
                     renderItem={({item}) => (
                         <MultipleViewCryptoWithPriceAndPercentage
-                            firstView={item.logo}
-                            secondView={item.title}
-                            thirdView={item.nbToken}
+                            firstView={
+                                getSvg(item.logo_url)
+                            }
+                            secondView={item.name}
+                            thirdView={"0 " + item.id}
                             logoStyle={TokenPartStyle.viewLogo}
                             titleStyle={TokenPartStyle.viewTitle}
                             iconStyle={TokenPartStyle.viewNbToken}
                             containerStyle={item.containerStyle}
-                            cryptoPrice={item.price}
-                            cryptoPercentage={getTendencyToString(item.tendency)}
+                            thirdTextStyle={TokenPartStyle.nbToken}
+                            cryptoPrice={"€" + getRoundedInt(item.price)}
+                            cryptoPercentage={getTendencyToString(item["1d"] ? item["1d"].price_change_pct : 0)}
                             cryptoPriceStyle={TokenPartStyle.price}
-                            cryptoPercentageStyle={[TokenPartStyle.price, getStyleColorTendency(item.tendency)]}
+                            cryptoPercentageStyle={[TokenPartStyle.price, getStyleColorTendency(item["1d"] ? item["1d"].price_change_pct : 0)]}
                             cryptoAndPriceContainerStyle={TokenPartStyle.priceAndTendencyContainer}
                         />
                     )}
