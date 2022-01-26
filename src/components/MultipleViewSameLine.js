@@ -1,4 +1,4 @@
-import {StyleSheet, View} from "react-native";
+import {StyleSheet, TouchableOpacity, View} from "react-native";
 import {Text} from "react-native-elements";
 import React from "react";
 
@@ -71,12 +71,18 @@ export const MultipleViewSameLine = (props) => {
 }
 
 export const MultipleViewCryptoWithPriceAndPercentage = (props) => {
+    const _props = props
+    const onPress = () => {
+        _props.onPress()
+        _props.function(_props.item)
+    }
+
     return (
-        <View style={[defaultStyles.container, props.containerStyle]}>
+        <TouchableOpacity style={[defaultStyles.container, props.containerStyle]} onPress={onPress}>
             {renderImageView(props.firstView, props.logoStyle)}
             {renderSimpleViewCryptoWithPriceAndPercentage(props.secondView, props.titleStyle, props.cryptoPrice, props.cryptoPercentage, props.cryptoPriceStyle, props.cryptoPercentageStyle, props.cryptoAndPriceContainerStyle)}
             {renderSimpleView(props.thirdView, props.iconStyle, props.isText, props.thirdTextStyle)}
-        </View>
+        </TouchableOpacity>
     )
 }
 

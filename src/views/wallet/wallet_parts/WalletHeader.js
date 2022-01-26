@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import {Image, StyleSheet, Text, View} from "react-native";
-import {MultiSelect} from "../../../components/MultiSelect";
 import {MaterialIcons} from "@expo/vector-icons";
+import ModalBottom from "../../../components/ModalBottom";
 
 
 const headerStyles = StyleSheet.create({
@@ -49,6 +49,15 @@ const headerStyles = StyleSheet.create({
 ;
 
 const WalletHeader = () => {
+    const [openModal, setopenModal] = useState(false);
+
+    const onOpen = () => {
+        setopenModal(true);
+    };
+
+    const onDismiss = () => {
+        setopenModal(false);
+    };
     return (
         <View style={headerStyles.headerContainer}>
             <View style={headerStyles.viewUser}>
@@ -57,17 +66,19 @@ const WalletHeader = () => {
                     source={require('../../pictures/1555333244267.jpg')}/>
             </View>
             <View style={headerStyles.viewCrypto}>
-                <MultiSelect title="Cryptos">
-                    <View style={headerStyles.multiSelectContainer}>
-                        <View>
-                            <Text style={headerStyles.pressText}>Etherium Main</Text>
-                        </View>
-                        <View style={headerStyles.viewArrowIcon}>
-                            <MaterialIcons name="keyboard-arrow-down" size={15} color="white"/>
-                        </View>
+                <View style={headerStyles.multiSelectContainer}>
+                    <View>
+                        <Text style={headerStyles.pressText} onPress={onOpen}>Etherium Main</Text>
                     </View>
-                </MultiSelect>
+                    <View style={headerStyles.viewArrowIcon}>
+                        <MaterialIcons name="keyboard-arrow-down" size={15} color="white" onPress={onOpen}/>
+                    </View>
+                </View>
             </View>
+            {openModal && (
+                <ModalBottom onDismiss={onDismiss} height={600}>
+                </ModalBottom>
+            )}
         </View>
     )
 }

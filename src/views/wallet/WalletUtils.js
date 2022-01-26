@@ -26,7 +26,7 @@ export const getStyleColorTendency = (percentage) => {
 
 export const getTendencyToString = (percentage) => {
     let to_return;
-    percentage = parseFloat(percentage)
+    percentage = getRoundedInt(parseFloat(percentage) * 100)
 
     if (percentage > 0) {
         to_return = "+"
@@ -39,5 +39,10 @@ export const getTendencyToString = (percentage) => {
 
 export const getRoundedInt = (num) => {
     return Math.round(num * 100) / 100
+}
 
+export const getPrice = (price, price_change) => {
+    price = getRoundedInt(price)
+    price_change = getRoundedInt(price_change)
+    return price + price_change
 }

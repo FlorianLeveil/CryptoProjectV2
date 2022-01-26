@@ -1,11 +1,12 @@
-import {getRoundedInt, getStyleColorTendency, getTendencyToString} from "../WalletUtils";
-import React from "react";
-import {FlatList, Image, ScrollView, StyleSheet, Text, View} from "react-native";
-import {FontAwesome5} from "@expo/vector-icons";
+import {getPrice, getRoundedInt, getStyleColorTendency, getTendencyToString} from "../WalletUtils";
+import React, {useState} from "react";
+import {Dimensions, FlatList, Image, ScrollView, StyleSheet, Text, View} from "react-native";
 import {MultipleViewCryptoWithPriceAndPercentage} from "../../../components/MultipleViewSameLine";
 import Button from "../../../components/Button";
 
 import {SvgUri,} from 'react-native-svg';
+import ModalBottom from "../../../components/ModalBottom";
+import {LineChart} from "react-native-chart-kit";
 
 
 const TokenPartStyle = StyleSheet.create({
@@ -71,31 +72,43 @@ const TokenPartStyle = StyleSheet.create({
     },
     nbToken: {
         textAlign: "right"
+    },
+    graphTitle: {
+        color: "white",
+        textAlign: "center",
+        fontSize: 18
     }
 })
 
-const oldData = [
-    {
-        id: 0,
-        logo: <FontAwesome5 name="bitcoin" size={35} color="white"/>,
-        title: 'Bitcoin',
-        nbToken: "19.2371 BTC", // TODO ajouter le sigle de la crypto
-        price: "€226.69",
-        tendency: "2"
-    }
-]
-
-const getSvg = (logoUrl) => {
+const getLogo = (logoUrl) => {
     let imageType = logoUrl.split(".")
     if (imageType[imageType.length - 1] === "svg") {
         return (<SvgUri width="40" height="40" uri={logoUrl}/>)
+    } else if (!logoUrl) {
+        return (<Text/>)
     }
+
     return (<Image
         source={{uri: logoUrl}}
         style={{maxWidth: 40, maxHeight: 40, height: "100%", width: "100%"}}/>)
 }
 
 const WalletTokenPart = (props) => {
+    const [openModal, setopenModal] = useState(false);
+    const [actualCrypto, setActualCrypto] = useState(null);
+
+    const onOpen = () => {
+        setopenModal(true);
+    };
+
+    const setCrypto = (crypto) => {
+        setActualCrypto(crypto)
+    }
+
+    const onDismiss = () => {
+        setopenModal(false);
+    };
+
     return (
         <View style={TokenPartStyle.tokenContainer}>
             <View style={TokenPartStyle.titleContainer}>
@@ -110,7 +123,7 @@ const WalletTokenPart = (props) => {
                     renderItem={({item}) => (
                         <MultipleViewCryptoWithPriceAndPercentage
                             firstView={
-                                getSvg(item.logo_url)
+                                getLogo(item.logo_url)
                             }
                             secondView={item.name}
                             thirdView={"0 " + item.id}
@@ -124,6 +137,9 @@ const WalletTokenPart = (props) => {
                             cryptoPriceStyle={TokenPartStyle.price}
                             cryptoPercentageStyle={[TokenPartStyle.price, getStyleColorTendency(item["1d"] ? item["1d"].price_change_pct : 0)]}
                             cryptoAndPriceContainerStyle={TokenPartStyle.priceAndTendencyContainer}
+                            onPress={onOpen}
+                            function={setCrypto}
+                            item={item}
                         />
                     )}
                     _keyExtractor={(item) => item.id.toString()}
@@ -136,6 +152,58 @@ const WalletTokenPart = (props) => {
                     title="+ Add Token"
                 />
             </View>
+            {openModal && (
+                <ModalBottom onDismiss={onDismiss} height={600}>
+                    <View>
+                        <Text style={TokenPartStyle.graphTitle}>{actualCrypto.name}</Text>
+                        <LineChart
+                            data={{
+                                labels: ["ytd", "365d", "30d", "7d", "1d", "actual"],
+                                datasets: [
+                                    {
+                                        data: [
+                                            getPrice(actualCrypto.price, actualCrypto["ytd"].price_change),
+                                            getPrice(actualCrypto.price, actualCrypto["365d"].price_change),
+                                            getPrice(actualCrypto.price, actualCrypto["30d"].price_change),
+                                            getPrice(actualCrypto.price, actualCrypto["7d"].price_change),
+                                            getPrice(actualCrypto.price, 0)
+                                        ]
+                                    }
+                                ]
+                            }}
+                            width={Dimensions.get("window").width} // from react-native
+                            height={220}
+                            yAxisLabel="€"
+                            yAxisSuffix=""
+                            yAxisInterval={1} // optional, defaults to 1
+                            chartConfig={{
+                                backgroundColor: "#06026c",
+                                backgroundGradientFrom: "#2a0669",
+                                backgroundGradientTo: "#700000",
+                                decimalPlaces: 2, // optional, defaults to 2dp
+                                color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                                labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                                style: {
+                                    borderRadius: 16,
+                                },
+                                propsForDots: {
+                                    r: "6",
+                                    strokeWidth: "2",
+                                    stroke: "#ffa726"
+                                },
+                                propsForLabels: {
+                                    fontSize: "10"
+                                }
+                            }}
+                            bezier
+                            style={{
+                                marginVertical: 8,
+                                borderRadius: 16
+                            }}
+                        />
+                    </View>
+                </ModalBottom>
+            )}
         </View>
     )
 }
