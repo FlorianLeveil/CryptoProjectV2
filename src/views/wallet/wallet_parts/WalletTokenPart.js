@@ -2,7 +2,7 @@ import {getPrice, getRoundedInt, getStyleColorTendency, getTendencyToString} fro
 import React, {useState} from "react";
 import {Dimensions, FlatList, Image, ScrollView, StyleSheet, Text, View} from "react-native";
 import {MultipleViewCryptoWithPriceAndPercentage} from "../../../components/MultipleViewSameLine";
-import Button from "../../../components/Button";
+import ButtonSurcharge from "../../../components/ButtonSurcharge";
 
 import {SvgUri,} from 'react-native-svg';
 import ModalBottom from "../../../components/ModalBottom";
@@ -146,7 +146,7 @@ const WalletTokenPart = (props) => {
                 />
             </ScrollView>
             <View style={TokenPartStyle.viewBottom}>
-                <Button
+                <ButtonSurcharge
                     stylePressable={TokenPartStyle.button}
                     styleTitle={TokenPartStyle.buttonTitle}
                     title="+ Add Token"

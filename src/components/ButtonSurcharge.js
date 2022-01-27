@@ -18,7 +18,7 @@ const buttonStyles = StyleSheet.create({
 		fontSize: 16,
 	},
 });
-const Button = (props) => {
+const ButtonSurcharge = (props) => {
 	if (props.isLinear) {
 		return (
 			<LinearGradient
@@ -49,4 +49,4 @@ const Button = (props) => {
 	}
 };
 
-export default Button;
+export default ButtonSurcharge;

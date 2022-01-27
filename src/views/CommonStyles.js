@@ -21,8 +21,8 @@ const commonStyles = StyleSheet.create({
         fontSize: 20
     },
     viewHeader: {
-        maxHeight: 100,
-        height: "100%",
+        marginTop: 30,
+        height: 50,
         justifyContent: "center"
     }
 });

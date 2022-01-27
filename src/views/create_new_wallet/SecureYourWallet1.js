@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Image, SafeAreaView, ScrollView, StyleSheet, Text, View,} from "react-native";
 import commonStyles from "../CommonStyles";
 import {Checkbox} from 'react-native-paper';
-import Button from "../../components/Button";
+import ButtonSurcharge from "../../components/ButtonSurcharge";
 import StepBar from "../../components/StepBar";
 import ModalBottom from "../../components/ModalBottom";
 
@@ -48,8 +48,8 @@ const SecureYourWallet1 = ({navigation}) => {
 	};
 	const [checked, setChecked] = React.useState(false);
 	const skip = () => {
-		onDismiss2
-		navigation.navigate('SecureYourWallet1')
+		onDismiss2();
+		navigation.navigate('Navbar');
 	}
 	return (
 		<View style={[commonStyles.container, {
@@ -103,7 +103,7 @@ const SecureYourWallet1 = ({navigation}) => {
 						paddingBottom: 20,
 						height: "100%"
 					}}>
-						<Button title="Start" isLinear={true}/>
+						<ButtonSurcharge title="Start" isLinear={true}/>
 					</View>
 				</View>
 			</SafeAreaView>
@@ -140,7 +140,7 @@ const SecureYourWallet1 = ({navigation}) => {
 					</View>
 					<View style={{marginTop: 30, flexDirection: "row", justifyContent: "center", alignItems: "center"}}>
 						<View style={{flex:1}}><Text style={{color: "#5F97FF", fontSize: 20, fontWeight: "600", alignSelf: "center"}} onPress={onDismiss2}>Secure</Text></View>
-						<View style={{flex: 1}}><Button disabled={!checked} title="Skip" isLinear={true} onPess={skip}/></View>
+						<View style={{flex: 1}}><ButtonSurcharge disabled={!checked} title="Skip" isLinear={true} onPress={skip}/></View>
 					</View>
 				</ModalBottom>
 			)}
@@ -151,7 +151,7 @@ const SecureYourWallet1 = ({navigation}) => {
 					<Text style={{color: "white", paddingVertical: 15, lineHeight: 20}}>You must keep your seed phrase secret and safe. If someone gets your seed phrase, they'll gain control over your accounts.</Text>
 					<Text style={{color: "white", paddingVertical: 15, lineHeight: 20}}>Save it in a place where only you can access it. If you lose it, not even MetaMask can help you recover it.</Text>
 					<View style={{flexGrow: 1}}></View>
-					<Button onPress={onDismiss} title="I Got It" isLinear={true}/>
+					<ButtonSurcharge onPress={onDismiss} title="I Got It" isLinear={true}/>
 				</ModalBottom>
 			)}
 		</View>);

@@ -1,9 +1,9 @@
 import React from "react";
 import {SafeAreaView, ScrollView, StyleSheet, Text, View,} from "react-native";
 import commonStyles from "../CommonStyles";
-import Input from "../../components/Input";
+import InputSurcharge from "../../components/InputSurcharge";
 import {Checkbox, Switch} from 'react-native-paper';
-import Button from "../../components/Button";
+import ButtonSurcharge from "../../components/ButtonSurcharge";
 import StepBar from "../../components/StepBar";
 import BackButton from "../../components/BackButton";
 import GradientText from "../../components/GradiantText";
@@ -86,8 +86,8 @@ const CreatePassword = ({navigation}) => {
 							lineHeight: 24
 						}}>This password will unlock your Metamask wallet only on this service</Text>
 					</View>
-					<Input label="Email" getCurrentValue={setEmail} validation={setValidateEmail} isEmail/>
-					<Input label="New Password" getCurrentValue={setPassword} validation={setValidatePassword} isPassword/>
+					<InputSurcharge label="Email" getCurrentValue={setEmail} validation={setValidateEmail} isEmail/>
+					<InputSurcharge label="New Password" getCurrentValue={setPassword} validation={setValidatePassword} isPassword/>
 
 					<View style={{height: 50, flexDirection: "row", justifyContent: "space-between"}}>
 						<View style={{justifyContent: "center"}}>
@@ -136,8 +136,8 @@ const CreatePassword = ({navigation}) => {
 						paddingBottom: 20,
 						height: "100%"
 					}}>
-						<Button disabled={!validatePassword || !validateEmail || !checked} title="Create Account" isLinear={true}
-								onPress={createAnUser}/>
+						<ButtonSurcharge disabled={!validatePassword || !validateEmail || !checked} title="Create Account" isLinear={true}
+										 onPress={createAnUser}/>
 					</View>
 				</View>
 			</SafeAreaView>

@@ -1,11 +1,7 @@
 import React from "react";
-import {
-	Text, StyleSheet, View
-} from "react-native";
-import {useFonts, Archivo_500Medium} from '@expo-google-fonts/archivo';
-import {SimpleLineIcons} from "@expo/vector-icons";
-import { TextInput } from 'react-native-paper';
-import {color} from "react-native-elements/dist/helpers";
+import {StyleSheet, Text, View} from "react-native";
+import {Archivo_500Medium, useFonts} from '@expo-google-fonts/archivo';
+import {TextInput} from 'react-native-paper';
 
 
 const inputStyles = StyleSheet.create({
@@ -36,7 +32,7 @@ const inputStyles = StyleSheet.create({
 	}
 });
 
-const Input = (props) => {
+const InputSurcharge = (props) => {
 	useFonts({
 		Archivo_500Medium,
 	});
@@ -115,4 +111,4 @@ const Input = (props) => {
 		</View>
 	);
 };
-export default Input;
+export default InputSurcharge;

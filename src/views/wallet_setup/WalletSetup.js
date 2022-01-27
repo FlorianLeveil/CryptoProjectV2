@@ -2,7 +2,7 @@ import React from "react";
 import {Text, View, Image} from "react-native";
 
 import commonStyles from "../CommonStyles";
-import Button from "../../components/Button";
+import ButtonSurcharge from "../../components/ButtonSurcharge";
 
 const WalletSetup = ({navigation}) => {
     return (
@@ -25,10 +25,10 @@ const WalletSetup = ({navigation}) => {
                     }}>Wallet Setup</Text>
                 </View>
                 <View style={{flex: 0.5, justifyContent: "center", paddingHorizontal: 20, paddingVertical: 20}}>
-                    <Button title="Login" onPress={() => navigation.navigate('Login')}/>
+                    <ButtonSurcharge title="Login" onPress={() => navigation.navigate('Login')}/>
                 </View>
                 <View style={{flex: 0.5, justifyContent: "center", paddingHorizontal: 20, paddingBottom: 40}}>
-                    <Button title="Create a New Wallet" isLinear={true} onPress={() => navigation.navigate('CreatePassword')}/>
+                    <ButtonSurcharge title="Create a New Wallet" isLinear={true} onPress={() => navigation.navigate('CreatePassword')}/>
                 </View>
             </View>
         </View>);

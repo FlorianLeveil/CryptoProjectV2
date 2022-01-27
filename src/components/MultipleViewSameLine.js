@@ -9,7 +9,6 @@ const defaultStyles = StyleSheet.create({
     },
     container: {
         flexDirection: "row",
-        maxHeight: 200,
         height: 80,
         alignItems: "center",
     }

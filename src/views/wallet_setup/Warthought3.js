@@ -2,7 +2,7 @@ import React from "react";
 import {Text, View, Image} from "react-native";
 
 import commonStyles from "../CommonStyles";
-import Button from "../../components/Button";
+import ButtonSurcharge from "../../components/ButtonSurcharge";
 import GradiantText from "../../components/GradiantText";
 import StepBar from "../../components/StepBar";
 
@@ -36,7 +36,7 @@ const Warthought3 = ({navigation}) => {
                     </View>
                 </View>
                 <View style={{flex: 0.5, justifyContent: "flex-end", paddingHorizontal: 20, paddingBottom: 20}}>
-                    <Button title="Get Start" onPress={() => navigation.navigate('WalletSetup')}/>
+                    <ButtonSurcharge title="Get Start" onPress={() => navigation.navigate('WalletSetup')}/>
                 </View>
             </View>
         </View>);

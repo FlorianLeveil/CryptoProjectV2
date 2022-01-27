@@ -1,8 +1,8 @@
 import React from "react";
 import {SafeAreaView, ScrollView, StyleSheet, View,} from "react-native";
 import commonStyles from "../CommonStyles";
-import Input from "../../components/Input";
-import Button from "../../components/Button";
+import InputSurcharge from "../../components/InputSurcharge";
+import ButtonSurcharge from "../../components/ButtonSurcharge";
 import BackButton from "../../components/BackButton";
 import GradientText from "../../components/GradiantText";
 import {signUserIn} from "../../firebase/firebase";
@@ -63,8 +63,8 @@ const Login = ({navigation}) => {
 					</View>
 				</View>
 				<ScrollView style={{flexGrow: 1}}>
-					<View style={{paddingTop: 30}}><Input forLogin getCurrentValue={setEmail} label="Email" isEmail/></View>
-					<View style={{paddingTop: 15}}><Input forLogin getCurrentValue={setPassword} label="Password" isPassword/></View>
+					<View style={{paddingTop: 30}}><InputSurcharge forLogin getCurrentValue={setEmail} label="Email" isEmail/></View>
+					<View style={{paddingTop: 15}}><InputSurcharge forLogin getCurrentValue={setPassword} label="Password" isPassword/></View>
 				</ScrollView>
 				<View style={{height: 80}}>
 					<View style={{
@@ -73,7 +73,7 @@ const Login = ({navigation}) => {
 						paddingBottom: 20,
 						height: "100%"
 					}}>
-						<Button title="Login" isLinear={true} onPress={login}/>
+						<ButtonSurcharge title="Login" isLinear={true} onPress={login}/>
 					</View>
 				</View>
 			</SafeAreaView>

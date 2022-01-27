@@ -27,7 +27,6 @@ const navStyles = StyleSheet.create({
 
 const Navbar = () => (
 
-        <NavigationContainer>
             <TabNavigator.Navigator
                 screenOptions={({route}) => ({
                     headerShown: false,
@@ -92,7 +91,6 @@ const Navbar = () => (
                     component={Settings}
                 />
             </TabNavigator.Navigator>
-        </NavigationContainer>
     )
 ;
 
