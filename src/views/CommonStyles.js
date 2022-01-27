@@ -22,7 +22,7 @@ const commonStyles = StyleSheet.create({
     },
     viewHeader: {
         marginTop: 30,
-        height: 50,
+        height: 80,
         justifyContent: "center"
     }
 });

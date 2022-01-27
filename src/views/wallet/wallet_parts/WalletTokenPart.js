@@ -1,4 +1,4 @@
-import {getPrice, getRoundedInt, getStyleColorTendency, getTendencyToString} from "../WalletUtils";
+import {getPrice, getRoundedInt, getStyleColorTendency, getTendencyToString} from "../../../WalletUtils";
 import React, {useState} from "react";
 import {Dimensions, FlatList, Image, ScrollView, StyleSheet, Text, View} from "react-native";
 import {MultipleViewCryptoWithPriceAndPercentage} from "../../../components/MultipleViewSameLine";
