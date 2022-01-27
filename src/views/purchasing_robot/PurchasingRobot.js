@@ -7,6 +7,7 @@ import MainBackground from "../../components/MainBackground";
 import {getCrypto} from "../../api/cryptoApi";
 import MultiSelect from "react-native-multiple-select";
 import {getRoundedInt} from "../../WalletUtils";
+import ButtonSurcharge from "../../components/ButtonSurcharge";
 
 const robotStyles = StyleSheet.create({
     container: {
@@ -213,7 +214,9 @@ const PurchasingRobot = ({}) => {
                         </View>
                     </View>
                 </View>
-
+                <View style={{flex: 0.5, justifyContent: "center", paddingHorizontal: 20, paddingVertical: 20}}>
+                    <ButtonSurcharge title="Simulate"/>
+                </View>
             </ScrollView>
         </MainBackground>
     );

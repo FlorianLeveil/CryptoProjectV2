@@ -36,7 +36,6 @@ export const getTendencyToString = (percentage) => {
     return to_return + percentage.toString() + "%"
 }
 
-
 export const getRoundedInt = (num) => {
     return Math.round(num * 100) / 100
 }
